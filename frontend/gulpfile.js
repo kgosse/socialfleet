@@ -14,15 +14,22 @@ gulp.task('default', ['scripts', 'serve']);
 gulp.task('scripts', function(){
   var tempIndex = gulp.src(paths.index).pipe(gulp.dest(paths.temp));
 
+  var scripts = gulp.src('app/**/*.js').pipe(gulp.dest(paths.temp));
+
   var tempVendors = gulp.src(mainBowerFiles()).pipe(gulp.dest(paths.tempVendor));
 
-  tempIndex.pipe(inject(tempVendors, {relative: true}))
+  tempIndex
+    .pipe(inject(scripts, {relative: true}))
+    .pipe(inject(tempVendors, {
+      relative: true,
+      name:     'vendorInject'
+    }))
     .pipe(gulp.dest(paths.temp));
 });
 
 gulp.task('serve', function(){
   gulp.src(paths.temp)
     .pipe(webserver({
-      open: true
+      //open: true
     }));
 });
