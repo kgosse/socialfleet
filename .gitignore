@@ -111,6 +111,7 @@ npm-debug.log
 
 *~
 *#
+*.swp
 .DS_STORE
 .netbeans
 nbproject
@@ -118,3 +119,4 @@ nbproject
 .node_history
 .editorconfig
 .sailsrc
+temp
