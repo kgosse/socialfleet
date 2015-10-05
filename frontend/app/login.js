@@ -4,6 +4,10 @@
 
 angular.module('app').controller('Login', function($scope){
   $scope.login = function(){
-    console.log('works');
+    console.log('login');
+  };
+
+  $scope.tweet = function(){
+    console.log('tweet');
   }
 });
