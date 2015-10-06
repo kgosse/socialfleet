@@ -61,7 +61,7 @@ gulp.task('vendors', function(){
 
 gulp.task('scripts', function(){
 
-  var appFiles = gulp.src(paths.app).pipe(gulp.dest(paths.temp));
+  var appFiles = gulp.src(paths.appSrc).pipe(gulp.dest(paths.temp));
 
   return gulp.src(paths.tempIndex)
     .pipe(inject(appFiles, {

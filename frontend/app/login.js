@@ -2,9 +2,9 @@
  * Created by kevin gosse on 06/10/2015.
  */
 
-angular.module('app').controller('Login', function($scope){
+angular.module('app').controller('Login', function($scope, $auth){
   $scope.login = function(){
-    console.log('login');
+    $auth.authenticate('twitter');
   };
 
   $scope.tweet = function(){
