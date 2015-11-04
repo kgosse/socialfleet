@@ -61,8 +61,6 @@ module.exports = {
           json: true
         }, function(err, response, profile) {
 
-          console.log('token ', accessToken);
-          //console.log('response ', profile);
           // Step 5a. Link user accounts.
           if (req.headers.authorization) {
             User.findOne({ twitter: profile.id }, function(err, existingUser) {
