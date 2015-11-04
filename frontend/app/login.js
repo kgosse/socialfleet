@@ -8,6 +8,8 @@ angular.module('app').controller('Login', function($scope, $auth, $http){
   };
 
   $scope.tweet = function(){
-    $http.get('/api/user/test');
-  }
+    $http.post('/api/post/tweet', '').then(function(){
+
+    });
+  };
 });

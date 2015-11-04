@@ -11,6 +11,7 @@ var qs = require('querystring');
 var request = require('request');
 var jwt = require('jwt-simple');
 var moment = require('moment');
+var config = require('../services/config');
 
 module.exports = {
   login: function(req, res)	{
@@ -60,6 +61,8 @@ module.exports = {
           json: true
         }, function(err, response, profile) {
 
+          console.log('token ', accessToken);
+          //console.log('response ', profile);
           // Step 5a. Link user accounts.
           if (req.headers.authorization) {
             User.findOne({ twitter: profile.id }, function(err, existingUser) {
@@ -77,8 +80,10 @@ module.exports = {
 
                 user.twitter = profile.id;
                 user.displayName = user.displayName || profile.name;
+                user.twitterToken = accessToken.oauth_token;
+                user.twitterSecret = accessToken.oauth_token_secret;
                 //user.picture = user.picture || profile.profile_image_url.replace('_normal', '');
-                user.exec(function(err, user) {
+                user.save(function(err, user) {
                   res.send({ token: createJWT(user) });
                 });
               });
@@ -91,8 +96,10 @@ module.exports = {
               }
 
               User.create({
-                twitter:     profile.id,
-                displayName: profile.name
+                twitter:       profile.id,
+                displayName:   profile.name,
+                twitterToken:  accessToken.oauth_token,
+                twitterSecret: accessToken.oauth_token_secret
               }).exec(function(err, user) {
                 res.send({ token: createJWT(user) });
               });

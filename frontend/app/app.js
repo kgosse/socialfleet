@@ -5,6 +5,7 @@
 angular.module('app', ['satellizer'])
   .config(function($authProvider){
     $authProvider.twitter({
-      url: '/api/user/login'
+      url: '/api/user/login',
+      authorizationEndpoint: 'https://api.twitter.com/oauth/authorize'
     })
   });

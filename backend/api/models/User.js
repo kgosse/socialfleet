@@ -17,8 +17,10 @@ module.exports = {
       type:   'string',
       select: false
     },
-    displayName: 'string',
-    twitter:     'string'
+    displayName:   'string',
+    twitter:       'string',
+    twitterToken:  'string',
+    twitterSecret: 'string'
   }
 };
 
