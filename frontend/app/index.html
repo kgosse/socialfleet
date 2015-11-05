@@ -11,7 +11,13 @@
 </nav>
 <div class="container">
   <button class="btn btn-primary" ng-hide="isAuthenticated()" ng-click="login()">Login</button>
-  <button class="btn btn-primary" ng-click="tweet()">Tweet</button>
+
+  <div class="well">
+    <div class="form-group">
+      <input type="text" class="form-control" placeholder="tweet message" ng-model="message"/>
+    </div>
+    <button class="btn btn-default" ng-click="tweet()">Tweet</button>
+  </div>
 </div>
 <!-- vendorInject:js -->
 <!-- endinject -->
