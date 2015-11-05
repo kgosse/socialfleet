@@ -14,6 +14,4 @@ angular.module('app').controller('Login', function($scope, $auth, $http){
     $auth.logout();
   };
 
-
-
 });
