@@ -12,17 +12,20 @@
 <div class="container">
   <button class="btn btn-primary" ng-hide="isAuthenticated()" ng-click="login()">Login</button>
 
-  <div class="well">
-    <div class="form-group">
-      <input type="text" class="form-control" placeholder="tweet message" ng-model="message"/>
-    </div>
-    <p class="input-group">
-      <input class="form-control" uib-datepicker-popup ng-model="date" is-open="opened" min-date="minDate" type="text"/>
+  <div class="col-sm-8 col-md-6 col-md-offset-3 col-md-offset-2">
+    <div class="well clearfix">
+      <div class="form-group">
+        <textarea rows="4" type="text" class="form-control" placeholder="tweet message" ng-model="message"></textarea>
+      </div>
+      <p class="input-group">
+        <input class="form-control" uib-datepicker-popup ng-model="date" is-open="opened" min-date="minDate" type="text"/>
       <span class="input-group-btn">
         <button class="btn btn-default" ng-click="open($event)"><i class="glyphicon glyphicon-calendar"></i></button>
       </span>
-    </p>
-    <button class="btn btn-primary" ng-click="tweet()">Tweet</button>
+      </p>
+      <timepicker ng-model="time"></timepicker>
+      <button class="btn btn-primary pull-right" ng-click="tweet()">Tweet</button>
+    </div>
   </div>
 </div>
 <!-- vendorInject:js -->
