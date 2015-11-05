@@ -15,24 +15,5 @@ angular.module('app').controller('Login', function($scope, $auth, $http){
   };
 
 
-  $scope.tweet = function(){
-    $http.post('/api/post/tweet', {
-      message: $scope.message
-    }).then(function(){
 
-    });
-  };
-
-  $scope.minDate = new Date();
-
-  $scope.time = new Date();
-
-  $scope.opened = false;
-
-  $scope.open = function($event){
-    $event.preventDefault();
-    $event.stopPropagation();
-
-    $scope.opened = !$scope.opened;
-  }
 });
