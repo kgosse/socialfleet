@@ -1,4 +1,4 @@
-module.exports = function(req, res){
+module.exports = function(req, res, next){
   var model = req.options.model;
 
   if (!model)
