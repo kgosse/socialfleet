@@ -31,11 +31,14 @@ angular.module('app').controller('Post', function($scope, $http, $location, toas
   {
     getPost();
     $scope.save = editPost;
+    $scope.isEditing = true;
   }
   else
   {
     $scope.save = newPost;
   }
+
+  $scope.delete = deletePost;
 
   function newPost(){
 
@@ -69,7 +72,13 @@ angular.module('app').controller('Post', function($scope, $http, $location, toas
       message:  $scope.message,
       datetime: datetime
     }).then(function(){
-      toastr.success("new post created");
+      toastr.success("post was edited successfully");
+    });
+  }
+
+  function deletePost() {
+    $http.post('/api/post/destroy/' + id).then(function(){
+      toastr.info("post was deleted");
     });
   }
 
