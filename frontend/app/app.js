@@ -2,8 +2,8 @@
  * Created by kevin gosse on 03/10/2015.
  */
 
-angular.module('app', ['satellizer', 'ui.bootstrap', 'ui.router'])
-  .config(function($authProvider, $stateProvider){
+angular.module('app', ['satellizer', 'ui.bootstrap', 'ui.router', 'toastr', 'ngAnimate'])
+  .config(function($authProvider, $stateProvider, toastrConfig){
     $authProvider.twitter({
       url: '/api/user/login',
       authorizationEndpoint: 'https://api.twitter.com/oauth/authorize'
@@ -17,5 +17,7 @@ angular.module('app', ['satellizer', 'ui.bootstrap', 'ui.router'])
       url: '/post?id',
       templateUrl: 'post.html',
       controller: 'Post'
-    })
+    });
+
+    toastrConfig.positionClass = 'toast-bottom-right';
   });

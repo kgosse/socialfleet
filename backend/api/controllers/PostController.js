@@ -21,6 +21,7 @@ module.exports = {
         owner: req.userId
       }).exec(function(err, post){
         console.log("working", post, err);
+        res.status(200).end();
       })
     });
 

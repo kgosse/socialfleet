@@ -15,10 +15,13 @@ module.exports = function(req, res, next){
 
   req.userId = payload.sub;
   next();
+
+  function handleError(){
+    return res.status(401).send({
+      error: 'You are not authorized'
+    });
+  }
+
 };
 
-function handleError(){
-  return res.status(401).send({
-    error: 'You are not authorized'
-  });
-}
+
