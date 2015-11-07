@@ -19,9 +19,9 @@ angular.module('app').controller('Post', function($scope, $http, $location, toas
   function getPost(){
     $http.get('/api/post/' + id).then(function(post){
       $scope.message = post.data.message;
-      $scope.date = post.data.datetime;
+      $scope.date = post.data.scheduledfor;
 
-      var datetime = new Date(post.data.datetime);
+      var datetime = new Date(post.data.scheduledfor);
 
       $scope.time = datetime;
     })
@@ -52,7 +52,7 @@ angular.module('app').controller('Post', function($scope, $http, $location, toas
 
     $http.post('/api/post/tweet', {
       message:  $scope.message,
-      datetime: datetime
+      scheduledfor: datetime
     }).then(function(){
       toastr.success("new post created");
     });
@@ -70,7 +70,7 @@ angular.module('app').controller('Post', function($scope, $http, $location, toas
 
     $http.post('/api/post/update/' + id, {
       message:  $scope.message,
-      datetime: datetime
+      scheduledfor: datetime
     }).then(function(){
       toastr.success("post was edited successfully");
     });

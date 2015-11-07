@@ -8,8 +8,8 @@
 module.exports = {
 
   attributes: {
-    message:  'string',
-    datetime: 'datetime',
+    message:      'string',
+    scheduledfor: 'datetime',
     owner: {
       model: 'user'
     }
