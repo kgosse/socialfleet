@@ -2,36 +2,49 @@ var sails = require("sails");
 var Twit = require('twit');
 
 sails.load(function(){
-  checkPosts();
+  setInterval(function(){
+    checkPosts();
+  }, config.scheduledInterval);
 });
 
 function checkPosts(){
   Post.find().where({
     scheduledfor: {
       '<': new Date()
-    }
+    },
+    isPosted: false
   }).populate('owner')
     .exec(function(err, posts){
       console.log(posts);
       posts.forEach(function(post){
-        sendTweet();
+        var token = post.owner.twitterToken;
+        var secret = post.owner.message;
+        sendTweet(token, secret, post.message, function(){
+          updateSentPost(post);
+        });
       });
     });
 }
 
-function sendTweet(token, secret, message){
+function sendTweet(token, secret, message, cb){
   var T = new Twit({
     consumer_key:        config.TWITTER_KEY,
     consumer_secret:     config.TWITTER_SECRET,
-    access_token:        user.twitterToken,
-    access_token_secret: user.twitterSecret
+    access_token:        token,
+    access_token_secret: secret
   });
 
-  /*   T.post('statuses/update', {
-   status: message
-   }, function(err, data, response) {
-   console.log(data, err);
-   res.status(200).end();
-   });
-   });*/
+  T.post('statuses/update', {
+    status: message
+  }, function(err, data, response) {
+    console.log("sent successfully", err);
+    cb();
+  });
+}
+
+function updateSentPost(post){
+  post.isPosted = true;
+  post.save(function(){
+    console.log("post updated");
+  });
 }

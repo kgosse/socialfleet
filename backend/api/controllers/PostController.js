@@ -4,8 +4,8 @@
  * @description :: Server-side logic for managing posts
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
-var Twit = require('twit');
-var config = require('../services/config');
+
+//var config = require('../services/config');
 
 module.exports = {
   tweet: function(req, res){
@@ -16,9 +16,10 @@ module.exports = {
       var datetime = req.body.scheduledfor;
 
       Post.create({
-        message:  message,
+        message:      message,
         scheduledfor: datetime,
-        owner: req.userId
+        isPosted:     false,
+        owner:        req.userId
       }).exec(function(err, post){
         console.log("working", post, err);
         res.status(200).end();
